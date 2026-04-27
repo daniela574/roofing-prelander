@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compare Roofing Prices in Your Area</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1b3a5c;
+      --navy-dark: #122840;
+      --amber: #e8a020;
+      --amber-light: #fff8ed;
+      --amber-border: #f0c060;
+      --green-bg: #eaf4de;
+      --green-text: #3b6d11;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --text-muted: #888;
+      --border: #e2e2e2;
+      --bg-alt: #f6f7f9;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f0f2f5;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--white);
+      min-height: 100vh;
+      box-shadow: 0 0 40px rgba(0,0,0,0.12);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 100%);
+      padding: 2.5rem 1.75rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--amber);
+      color: #412402;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      max-width: 440px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ── NOT FREE ALERT ── */
+    .alert-bar {
+      background: var(--amber-light);
+      border-bottom: 1.5px solid var(--amber-border);
+      padding: 11px 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .alert-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .alert-icon svg { width: 11px; height: 11px; }
+    .alert-text {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #7a4500;
+      line-height: 1.5;
+    }
+
+    /* ── ROOF ILLUSTRATION ── */
+    .roof-visual {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      display: block;
+    }
+    .roof-visual svg { width: 100%; height: 100%; display: block; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-item {
+      padding: 1rem 0.75rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      display: block;
+    }
+    .stat-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.3;
+      display: block;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 1.75rem 1.5rem; }
+    .section-alt { background: var(--bg-alt); padding: 1.75rem 1.5rem; }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── BENEFITS ── */
+    .benefit {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .benefit:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .benefit-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--green-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .benefit-check svg { width: 11px; height: 11px; }
+    .benefit-body { font-size: 14px; color: var(--text); line-height: 1.6; }
+    .benefit-body strong { font-weight: 600; color: var(--navy); }
+
+    /* ── STEPS ── */
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 1.1rem;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .step-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-question {
+      font-family: 'DM Serif Display', serif;
+      font-size: 21px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 0.5rem;
+    }
+    .cta-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-btn {
+      display: block;
+      width: 100%;
+      background: var(--amber);
+      color: #412402;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 24px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.2px;
+      margin-bottom: 1rem;
+    }
+    .cta-btn:hover { background: #d48f10; transform: translateY(-1px); }
+    .cta-btn:active { transform: translateY(0); }
+    .cta-legal {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER DISCLAIMER ── */
+    .footer-disc {
+      background: #f0f2f5;
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+    }
+    .footer-disc p {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1 { animation: fadeUp 0.6s ease both; }
+    .hero p  { animation: fadeUp 0.6s 0.1s ease both; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      .hero { padding: 2rem 1.25rem 1.75rem; }
+      .section, .section-alt { padding: 1.5rem 1.25rem; }
+      .cta-section { padding: 1.75rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">For Homeowners</div>
+    <h1>Roofing prices can vary more than most homeowners expect</h1>
+    <p>Compare available quotes to better understand cost, price differences, and potential savings in your area.</p>
+  </div>
+
+  <!-- NOT FREE ALERT -->
+  <div class="alert-bar">
+    <div class="alert-icon">
+      <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.5 1v4M5.5 8v.5" stroke="#7a4500" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="alert-text">Important: This is not a free service. Roofing costs vary by project and location.</div>
+  </div>
+
+  <!-- ROOF ILLUSTRATION -->
+  <div class="roof-visual">
+    <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Sky -->
+      <rect width="600" height="200" fill="#a8d4f0"/>
+      <!-- Clouds -->
+      <ellipse cx="100" cy="40" rx="55" ry="20" fill="white" opacity="0.8"/>
+      <ellipse cx="140" cy="35" rx="40" ry="18" fill="white" opacity="0.9"/>
+      <ellipse cx="460" cy="50" rx="45" ry="16" fill="white" opacity="0.7"/>
+      <ellipse cx="500" cy="44" rx="35" ry="15" fill="white" opacity="0.8"/>
+      <!-- Lawn -->
+      <rect y="148" width="600" height="52" fill="#6a9a52"/>
+      <rect y="158" width="600" height="42" fill="#5a8844"/>
+      <!-- House body -->
+      <rect x="160" y="88" width="280" height="115" fill="#d4c4a8"/>
+      <!-- Roof -->
+      <polygon points="130,90 300,20 470,90" fill="#3d2a14"/>
+      <polygon points="130,90 300,26 470,90 460,90 300,33 140,90" fill="#2a1c0a"/>
+      <!-- Roof shingles lines -->
+      <line x1="130" y1="70" x2="470" y2="70" stroke="#2a1c0a" stroke-width="1" opacity="0.4"/>
+      <line x1="145" y1="55" x2="455" y2="55" stroke="#2a1c0a" stroke-width="1" opacity="0.4"/>
+      <line x1="163" y1="42" x2="437" y2="42" stroke="#2a1c0a" stroke-width="1" opacity="0.3"/>
+      <!-- Windows left -->
+      <rect x="185" y="105" width="65" height="50" fill="#a8d8ea"/>
+      <rect x="187" y="107" width="61" height="1.5" fill="white" opacity="0.5"/>
+      <line x1="217" y1="107" x2="217" y2="155" stroke="white" stroke-width="1.5" opacity="0.4"/>
+      <!-- Windows right -->
+      <rect x="350" y="105" width="65" height="50" fill="#a8d8ea"/>
+      <rect x="352" y="107" width="61" height="1.5" fill="white" opacity="0.5"/>
+      <line x1="382" y1="107" x2="382" y2="155" stroke="white" stroke-width="1.5" opacity="0.4"/>
+      <!-- Door -->
+      <rect x="265" y="120" width="70" height="83" fill="#8b6a3a"/>
+      <rect x="267" y="122" width="66" height="2" fill="white" opacity="0.2"/>
+      <circle cx="297" cy="162" r="4" fill="#c8a060"/>
+      <!-- Chimney -->
+      <rect x="380" y="28" width="30" height="55" fill="#5a4030"/>
+      <rect x="377" y="25" width="36" height="8" fill="#4a3020"/>
+      <!-- Path -->
+      <polygon points="275,200 325,200 340,165 260,165" fill="#c8b898"/>
+      <!-- Bushes -->
+      <ellipse cx="185" cy="165" rx="22" ry="14" fill="#4a7a3a"/>
+      <ellipse cx="415" cy="165" rx="22" ry="14" fill="#4a7a3a"/>
+    </svg>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-val">Local</span>
+      <span class="stat-lbl">Contractors in your area</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">Free</span>
+      <span class="stat-lbl">Cost to get your quote</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">No&nbsp;obligation</span>
+      <span class="stat-lbl">Just price information</span>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="section">
+    <div class="section-title">Why compare roofing prices?</div>
+
+    <div class="benefit">
+      <div class="benefit-check">
+        <svg viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5l3 3 5-5" stroke="#3B6D11" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-body">
+        <strong>Understand real cost.</strong> Roofing prices depend on materials, labor, and your location. Getting a quote may help you understand what your project could realistically cost.
+      </div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-check">
+        <svg viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5l3 3 5-5" stroke="#3B6D11" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-body">
+        <strong>Potential savings.</strong> Prices may vary between contractors in your area — comparing available options could potentially help you find better pricing for your project.
+      </div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-check">
+        <svg viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5l3 3 5-5" stroke="#3B6D11" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-body">
+        <strong>Local roofing contractors.</strong> See available quotes from roofing contractors near you — all in one place, based on your zip code.
+      </div>
+    </div>
+
+    <div class="benefit">
+      <div class="benefit-check">
+        <svg viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5l3 3 5-5" stroke="#3B6D11" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-body">
+        <strong>Make an informed decision.</strong> Understanding your price options before committing may help you choose what works best for your home and budget.
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-alt">
+    <div class="section-title">How it works</div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Enter your zip code</div>
+        <div class="step-desc">Tell us your location so we can find roofing contractors available in your area.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">View available quotes</div>
+        <div class="step-desc">See roofing price options and cost information from local contractors near you.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Choose what works for you</div>
+        <div class="step-desc">Review your options and decide what fits your needs — no pressure, no obligation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-question">Are you a homeowner looking to explore roofing price options?</div>
+    <div class="cta-sub">Getting your quote is free. Roofing services are not — costs and potential savings vary by project and location.</div>
+    <!-- REPLACE href WITH YOUR AFFILIATE LINK -->
+    <a href="https://go.newhomeflow.com/" class="cta-btn">Yes, View Available Quotes →</a>
+    <div class="cta-legal">By clicking above, you agree to be connected with local roofing contractors who may contact you with price information and quotes.</div>
+  </div>
+
+  <!-- FOOTER DISCLAIMER -->
+  <div class="footer-disc">
+    <p>This is not a free service. Roofing costs and potential savings may vary depending on your location, materials selected, and individual project circumstances. This site connects homeowners with local roofing contractors. We do not provide roofing services directly.</p>
+  </div>
+
+</div>
+</body>
+</html>
