@@ -5,87 +5,184 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roofing Prices in Your Area</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --navy: #0f2137; --navy2: #1b3a5c; --amber: #f0a500; --white: #ffffff; }
-    html, body { min-height: 100vh; font-family: 'Manrope', sans-serif; background: var(--navy); color: var(--white); }
-    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 15% 15%, rgba(240,165,0,0.07) 0%, transparent 55%), radial-gradient(ellipse at 85% 85%, rgba(27,58,92,0.5) 0%, transparent 55%); pointer-events: none; z-index: 0; }
-    .wrap { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.25rem; }
-    .roof-img { width: 100%; max-width: 540px; height: 200px; object-fit: cover; object-position: center 20%; border-radius: 16px 16px 0 0; display: block; }
-    .card { width: 100%; max-width: 540px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-top: none; border-radius: 0 0 20px 20px; padding: 2.25rem 2rem 2rem; backdrop-filter: blur(10px); position: relative; }
-    .card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--amber), transparent); border-radius: 0 0 20px 20px; }
-    .not-free-bar { background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.2); border-radius: 8px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
-    .not-free-bar span { font-size: 12px; font-weight: 600; color: rgba(255,200,80,0.9); line-height: 1.4; }
-    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
-    .question { font-family: 'Playfair Display', serif; font-size: clamp(22px, 5vw, 30px); font-weight: 900; color: var(--white); line-height: 1.25; margin-bottom: 0.6rem; }
-    .sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.65; margin-bottom: 2rem; }
-    .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
-    .btn-choice { padding: 20px 12px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--white); font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 800; cursor: pointer; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; }
-    .btn-choice .emoji { font-size: 26px; }
-    .btn-yes { background: linear-gradient(135deg, rgba(240,165,0,0.15), rgba(240,165,0,0.05)); border-color: rgba(240,165,0,0.4); }
-    .btn-yes:hover { background: linear-gradient(135deg, rgba(240,165,0,0.25), rgba(240,165,0,0.1)); border-color: var(--amber); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(240,165,0,0.2); }
-    .btn-no { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); }
-    .btn-no:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
-    .btn-choice:active { transform: translateY(0); }
-    .disclaimer { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.65; }
-    .sorry { display: none; text-align: center; padding: 1rem 0; animation: fadeUp 0.4s ease both; }
-    .sorry.active { display: block; }
-    .sorry-emoji { font-size: 40px; margin-bottom: 1rem; }
-    .sorry-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
-    .sorry-sub { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.6; }
-    .quiz-content { transition: opacity 0.3s ease; }
-    .quiz-content.hidden { display: none; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    .footer { width: 100%; max-width: 540px; margin-top: 1.25rem; text-align: center; }
-    .footer p { font-size: 11px; color: rgba(255,255,255,0.2); line-height: 1.7; }
-    @media (max-width: 400px) { .card { padding: 1.75rem 1.25rem; } .btn-choice { padding: 18px 8px; font-size: 16px; } .btn-choice .emoji { font-size: 22px; } }
+
+    html, body {
+      height: 100%;
+      font-family: 'Manrope', sans-serif;
+      background: #0f2137;
+      color: #fff;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    /* QUIZ STATE */
+    .quiz { width: 100%; max-width: 480px; }
+
+    .tag {
+      display: inline-block;
+      background: rgba(240,165,0,0.15);
+      border: 1px solid rgba(240,165,0,0.3);
+      color: #f0a500;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.75rem;
+    }
+
+    .question {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 6vw, 38px);
+      font-weight: 900;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .question span { color: #f0a500; }
+
+    .hint {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 1.75rem;
+    }
+
+    .btn {
+      padding: 22px 16px;
+      border-radius: 16px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .btn .ico { font-size: 28px; }
+
+    .btn-yes {
+      background: #f0a500;
+      color: #1a0f00;
+      box-shadow: 0 8px 32px rgba(240,165,0,0.3);
+    }
+    .btn-yes:hover {
+      background: #ffc020;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(240,165,0,0.45);
+    }
+
+    .btn-no {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6);
+      border: 1.5px solid rgba(255,255,255,0.1);
+    }
+    .btn-no:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .btn:active { transform: translateY(0) !important; }
+
+    /* DISCLAIMER */
+    .disc {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.7;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* SORRY STATE */
+    .sorry {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeUp 0.4s ease both;
+    }
+    .sorry.show { display: block; }
+    .sorry-ico { font-size: 48px; margin-bottom: 1rem; }
+    .sorry-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .sorry-sub { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 380px) {
+      .btn { padding: 18px 12px; font-size: 18px; }
+      .btn .ico { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
+<div class="page">
 
-  <img src="roof.jpg" alt="House with new roof" class="roof-img" />
-
-  <div class="card">
-    <div class="quiz-content" id="quizContent">
-      <div class="not-free-bar">
-        <span>⚠️ Important: This is not a free service. Roofing costs vary by project and location.</span>
-      </div>
-      <div class="eyebrow">For Homeowners</div>
-      <div class="question">Are you a homeowner looking to compare roofing prices in your area?</div>
-      <div class="sub">Roofing costs can vary significantly depending on your location and materials. One click to see available quotes from local contractors — no obligation.</div>
-      <div class="btn-group">
-        <!-- REPLACE # WITH YOUR AFFILIATE LINK -->
-        <a href="#" class="btn-choice btn-yes">
-          <span class="emoji">✅</span>
-          YES
-        </a>
-        <button class="btn-choice btn-no" onclick="showSorry()">
-          <span class="emoji">❌</span>
-          NO
-        </button>
-      </div>
-      <div class="disclaimer">Getting your quote is free — roofing services are not. By clicking YES, you agree to be connected with local roofing contractors who may contact you with price information and available quotes.</div>
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz">
+    <div class="tag">For Homeowners</div>
+    <div class="question">Are you looking to compare <span>roofing prices</span> in your area?</div>
+    <div class="hint">Local contractors · Available quotes · No obligation</div>
+    <div class="btn-group">
+      <!-- REPLACE # WITH YOUR AFFILIATE LINK -->
+      <a href="#" class="btn btn-yes">
+        <span class="ico">✅</span>
+        YES
+      </a>
+      <button class="btn btn-no" onclick="showSorry()">
+        <span class="ico">❌</span>
+        NO
+      </button>
     </div>
-
-    <div class="sorry" id="sorryState">
-      <div class="sorry-emoji">😔</div>
-      <div class="sorry-title">This service is for homeowners only</div>
-      <div class="sorry-sub">This roofing price comparison tool is currently available for homeowners only. If your situation changes, feel free to come back anytime.</div>
-    </div>
+    <div class="disc">Getting your quote is free. Roofing services are not — costs and potential savings may vary by project and location. By clicking YES you agree to be connected with local roofing contractors.</div>
   </div>
 
-  <div class="footer">
-    <p>This is not a free service. Roofing costs and potential savings may vary depending on your location, materials selected, and individual project circumstances. This site connects homeowners with local roofing contractors. We do not provide roofing services directly.</p>
+  <!-- SORRY -->
+  <div class="sorry" id="sorry">
+    <div class="sorry-ico">😔</div>
+    <div class="sorry-title">This is for homeowners only</div>
+    <div class="sorry-sub">This roofing price comparison tool is available for homeowners only. Feel free to come back if your situation changes.</div>
   </div>
 
 </div>
 <script>
   function showSorry() {
-    document.getElementById('quizContent').classList.add('hidden');
-    document.getElementById('sorryState').classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('sorry').classList.add('show');
   }
 </script>
 </body>
