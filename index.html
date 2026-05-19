@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roofing Prices in Your Area</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -25,182 +24,65 @@
   <!-- End Meta Pixel Code -->
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      height: 100%;
-      font-family: 'Manrope', sans-serif;
-      background: #0f2137;
-      color: #fff;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-
-    /* QUIZ STATE */
-    .quiz { width: 100%; max-width: 480px; }
-
-    .tag {
-      display: inline-block;
-      background: rgba(240,165,0,0.15);
-      border: 1px solid rgba(240,165,0,0.3);
-      color: #f0a500;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 1.75rem;
-    }
-
-    .question {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 6vw, 38px);
-      font-weight: 900;
-      line-height: 1.2;
-      color: #fff;
-      margin-bottom: 0.6rem;
-    }
-
-    .question span { color: #f0a500; }
-
-    .hint {
-      font-size: 14px;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 2.5rem;
-      line-height: 1.5;
-    }
-
-    /* BUTTONS */
-    .btn-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 1.75rem;
-    }
-
-    .btn {
-      padding: 22px 16px;
-      border-radius: 16px;
-      font-family: 'Manrope', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-    }
-    .btn .ico { font-size: 28px; }
-
-    .btn-yes {
-      background: #f0a500;
-      color: #1a0f00;
-      box-shadow: 0 8px 32px rgba(240,165,0,0.3);
-    }
-    .btn-yes:hover {
-      background: #ffc020;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(240,165,0,0.45);
-    }
-
-    .btn-no {
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.6);
-      border: 1.5px solid rgba(255,255,255,0.1);
-    }
-    .btn-no:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateY(-2px);
-    }
-
-    .btn:active { transform: translateY(0) !important; }
-
-    /* DISCLAIMER */
-    .disc {
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-      line-height: 1.7;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    /* SORRY STATE */
-    .sorry {
-      display: none;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      animation: fadeUp 0.4s ease both;
-    }
-    .sorry.show { display: block; }
-    .sorry-ico { font-size: 48px; margin-bottom: 1rem; }
-    .sorry-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-    .sorry-sub { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.6; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 380px) {
-      .btn { padding: 18px 12px; font-size: 18px; }
-      .btn .ico { font-size: 24px; }
+    html, body { height: 100%; font-family: 'Manrope', sans-serif; background: #f7f7f7; color: #1a1a1a; }
+    .page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 32px rgba(0,0,0,0.10); padding: 3rem 2.5rem 2rem; width: 100%; max-width: 560px; }
+    .banner { background: #1a56db; color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px; border-radius: 6px; margin-bottom: 2rem; display: inline-block; }
+    .question { font-size: clamp(22px, 5vw, 30px); font-weight: 800; line-height: 1.25; color: #1a1a1a; margin-bottom: 2rem; }
+    .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 1.5rem; }
+    .btn { padding: 18px 16px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 18px; font-weight: 800; cursor: pointer; transition: all 0.2s ease; border: 2px solid #e0e0e0; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; color: #1a1a1a; background: #fff; }
+    .btn:hover { border-color: #1a56db; color: #1a56db; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,86,219,0.12); }
+    .btn-yes { background: #1a56db; color: #fff; border-color: #1a56db; }
+    .btn-yes:hover { background: #1648c0; color: #fff; border-color: #1648c0; }
+    .security { font-size: 11px; color: #999; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .divider { border: none; border-top: 1px solid #efefef; margin-bottom: 1.75rem; }
+    .trustmarks { display: flex; align-items: center; justify-content: center; }
+    .trust-item { flex: 1; min-width: 120px; padding: 0 16px; border-right: 1px solid #e0e0e0; text-align: center; }
+    .trust-item:last-child { border-right: none; }
+    .trust-name { font-size: 15px; font-weight: 800; color: #1a1a1a; margin-bottom: 2px; }
+    .trust-name.google { color: #4285F4; }
+    .trust-name.trustpilot { color: #00b67a; }
+    .trust-stars { color: #f0a500; font-size: 13px; letter-spacing: 1px; margin-bottom: 2px; }
+    .trust-sub { font-size: 10px; color: #999; font-weight: 600; }
+    .disc { font-size: 10px; color: #bbb; line-height: 1.6; margin-top: 1.5rem; }
+    @media (max-width: 480px) {
+      .card { padding: 2rem 1.25rem 1.5rem; }
+      .trust-item { min-width: 90px; padding: 0 10px; }
+      .trust-name { font-size: 12px; }
+      .trust-sub { font-size: 9px; }
     }
   </style>
 </head>
 <body>
 <div class="page">
-
-  <!-- QUIZ -->
-  <div class="quiz" id="quiz">
-    <div class="tag">For Homeowners</div>
-    <div class="question">Are you looking to compare <span>roofing prices</span> in your area?</div>
-    <div class="hint">Local contractors · Available quotes · No obligation</div>
+  <div class="card">
+    <div class="banner">🏠 For Homeowners</div>
+    <div class="question">Are you a Homeowner looking to compare roofing prices?</div>
     <div class="btn-group">
-      <!-- REPLACE # WITH YOUR AFFILIATE LINK -->
-      <a href="https://trackrt.newhomeflow.com/click" class="btn btn-yes">
-        <span class="ico">✅</span>
-        YES
-      </a>
-      <button class="btn btn-no" onclick="showSorry()">
-        <span class="ico">❌</span>
-        NO
-      </button>
+      <a href="https://trackrt.newhomeflow.com/click" class="btn btn-yes">✅ Yes</a>
+      <a href="https://trackrt.newhomeflow.com/click" class="btn">❌ No</a>
+    </div>
+    <div class="security">🔒 We keep all your information 100% secure & confidential</div>
+    <hr class="divider" />
+    <div class="trustmarks">
+      <div class="trust-item">
+        <div class="trust-name"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div>
+        <div class="trust-stars">★★★★★</div>
+        <div class="trust-sub">Based on 22,000+ Reviews</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-name"><strong>Consumer</strong>Affairs</div>
+        <div class="trust-stars">★★★★★</div>
+        <div class="trust-sub">Based on 46,000+ Reviews</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-name trustpilot">★ Trustpilot</div>
+        <div class="trust-stars">★★★★★</div>
+        <div class="trust-sub">Based on 31,000+ Reviews</div>
+      </div>
     </div>
     <div class="disc">Getting your quote is free. Roofing services are not — costs and potential savings may vary by project and location. By clicking YES you agree to be connected with local roofing contractors.</div>
   </div>
-
-  <!-- SORRY -->
-  <div class="sorry" id="sorry">
-    <div class="sorry-ico">😔</div>
-    <div class="sorry-title">This is for homeowners only</div>
-    <div class="sorry-sub">This roofing price comparison tool is available for homeowners only. Feel free to come back if your situation changes.</div>
-  </div>
-
 </div>
-<script>
-  function showSorry() {
-    document.getElementById('quiz').style.display = 'none';
-    document.getElementById('sorry').classList.add('show');
-  }
-</script>
 </body>
 </html>
